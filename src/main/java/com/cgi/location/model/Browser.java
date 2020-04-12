@@ -1,5 +1,7 @@
 package com.cgi.location.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 
 public class Browser {
@@ -11,10 +13,13 @@ public class Browser {
 	private String username;
 	private String password;
 	private String owner;
+	private Boolean isEditable;
+	private Date modifiedDate;
 
 	public String getId() {
 		return id;
 	}
+
 	public String getHost() {
 		return host;
 	}
@@ -47,21 +52,40 @@ public class Browser {
 		this.owner = owner;
 	}
 
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public Boolean getIsEditable() {
+		return isEditable;
+	}
+
+	public void setIsEditable(Boolean isEditable) {
+		this.isEditable = isEditable;
+	}
+
 	public Browser() {
 	}
 
-	public Browser(String host, String username, String password, String owner) {
+	public Browser(String host, String username, String password, String owner, Boolean isEditable, Date modifiedDate) {
 		super();
 		this.host = host;
 		this.username = username;
 		this.password = password;
 		this.owner = owner;
+		this.isEditable = isEditable;
+		this.modifiedDate = modifiedDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Browser [id=" + id + ", host=" + host + ", username=" + username + ", password=" + password + ", owner="
-				+ owner + "]";
+				+ owner + ", isEditable=" + isEditable + ", modifiedDate=" + modifiedDate + "]";
 	}
 
+	
 }

@@ -1,5 +1,7 @@
 package com.cgi.location;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,8 +26,8 @@ public class LocationsApplication implements CommandLineRunner {
 		repository.deleteAll();
 
 		// save a couple of browsers
-		repository.save(new Browser("158.234.207.101", "tomcat8", "banana12", "mrinal"));
-		repository.save(new Browser("158.234.207.102", "tomcat8", "banana12", "sunny"));
+		repository.save(new Browser("158.234.207.101", "tomcat8", "banana12", "mrinal",false,new Date()));
+		repository.save(new Browser("158.234.207.102", "tomcat8", "banana12", "sunny", false,new Date()));
 
 		// fetch all browsers
 		System.out.println("Customers found with findAll():");
