@@ -13,7 +13,6 @@ public class Browser {
 	private String username;
 	private String password;
 	private String owner;
-	private Boolean isEditable;
 	private Date modifiedDate;
 
 	public String getId() {
@@ -60,32 +59,22 @@ public class Browser {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public Boolean getIsEditable() {
-		return isEditable;
-	}
-
-	public void setIsEditable(Boolean isEditable) {
-		this.isEditable = isEditable;
-	}
-
 	public Browser() {
 	}
 
-	public Browser(String host, String username, String password, String owner, Boolean isEditable, Date modifiedDate) {
+	public Browser(String host, String username, String password, String owner, Date modifiedDate) {
 		super();
 		this.host = host;
 		this.username = username;
 		this.password = password;
 		this.owner = owner;
-		this.isEditable = isEditable;
 		this.modifiedDate = modifiedDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Browser [id=" + id + ", host=" + host + ", username=" + username + ", password=" + password + ", owner="
-				+ owner + ", isEditable=" + isEditable + ", modifiedDate=" + modifiedDate + "]";
+				+ owner + ", modifiedDate=" + modifiedDate + "]";
 	}
 
-	
 }
