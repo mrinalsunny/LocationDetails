@@ -3,7 +3,9 @@ package com.cgi.location.model;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "Browser")
 public class Browser {
 
 	@Id
@@ -15,8 +17,23 @@ public class Browser {
 	private String owner;
 	private Date modifiedDate;
 
+	public Browser() {
+	}
+
+	public Browser(String host, String username, String password, String owner, Date modifiedDate) {
+		this.host = host;
+		this.username = username;
+		this.password = password;
+		this.owner = owner;
+		this.modifiedDate = modifiedDate;
+	}
+
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getHost() {
@@ -56,18 +73,6 @@ public class Browser {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	public Browser() {
-	}
-
-	public Browser(String host, String username, String password, String owner, Date modifiedDate) {
-		super();
-		this.host = host;
-		this.username = username;
-		this.password = password;
-		this.owner = owner;
 		this.modifiedDate = modifiedDate;
 	}
 

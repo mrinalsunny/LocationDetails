@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,13 @@ public class BrowserController {
 	BrowserService browserService;
 
 	@GetMapping("/get/all")
-	public List<Browser> getAllBrowsers() {
-		return browserService.getAll();
+	public List<Browser> getAllBrowser() {
+		return browserService.findAll();
+	}
+	
+	@GetMapping("/get/{id}")
+	public Browser getBrowser(@PathVariable("id") String id) {
+		return browserService.findById(id);
 	}
 	
 	@PostMapping("/add")
@@ -30,8 +36,8 @@ public class BrowserController {
 		return browserService.save(browser);
 	}
 	
-	@PostMapping("update/{id}")
-	public Browser updateBrowser(@PathVariable("id") String id, @RequestBody Browser browser) {
-		return browserService.update(id, browser);
+	@PutMapping("update/")
+	public Browser updateBrowser(@RequestBody Browser browser) {
+		return browserService.update(browser);
 	}
 }

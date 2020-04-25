@@ -10,7 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.cgi.location.model.Browser;
 import com.cgi.location.repo.BrowserRepository;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
+@EnableSwagger2
 public class LocationsApplication implements CommandLineRunner {
 
 	@Autowired
@@ -30,6 +33,9 @@ public class LocationsApplication implements CommandLineRunner {
 		repository.save(new Browser("158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
 
 		// fetch all browsers
+		System.out.println();
+		System.out.println("Customers found with findAll() by lambda:");
+		repository.findAll().forEach(System.out::println);
 		System.out.println("Customers found with findAll():");
 		System.out.println("-------------------------------");
 		for (Browser browser : repository.findAll()) {
@@ -38,6 +44,7 @@ public class LocationsApplication implements CommandLineRunner {
 		System.out.println();
 
 		// fetch an individual browsers
+
 		System.out.println("Customer found with findByOwner('mrinal'):");
 		System.out.println("--------------------------------");
 		System.out.println(repository.findByOwner("mrinal"));
