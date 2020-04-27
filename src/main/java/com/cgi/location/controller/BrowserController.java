@@ -15,7 +15,7 @@ import com.cgi.location.model.Browser;
 import com.cgi.location.service.BrowserService;
 
 @RestController
-@RequestMapping("/api/browser")
+@RequestMapping("/api/v1/browser")
 public class BrowserController {
 
 	@Autowired
@@ -25,19 +25,19 @@ public class BrowserController {
 	public List<Browser> getAllBrowser() {
 		return browserService.findAll();
 	}
-	
+
 	@GetMapping("/get/{id}")
 	public Browser getBrowser(@PathVariable("id") String id) {
 		return browserService.findById(id);
 	}
-	
+
 	@PostMapping("/add")
 	public Browser saveBrowser(@RequestBody Browser browser) {
 		return browserService.save(browser);
 	}
-	
-	@PutMapping("update/")
-	public Browser updateBrowser(@RequestBody Browser browser) {
-		return browserService.update(browser);
+
+	@PutMapping("update/{id}")
+	public Browser updateBrowser(@PathVariable("id") String id, @RequestBody Browser browser) {
+		return browserService.update(id, browser);
 	}
 }

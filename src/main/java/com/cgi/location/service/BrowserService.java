@@ -31,8 +31,14 @@ public class BrowserService {
 		return repository.save(browser);
 	}
 
-	public Browser update(Browser browser) {
-		browser.setModifiedDate(new Date());
-		return mongoTemplate.save(browser);
+	public Browser update(String id, Browser browser) {
+		Browser toUpdateBrowser = repository.findById(id).get();
+		System.out.println(toUpdateBrowser);
+		toUpdateBrowser.setHost(browser.getHost());
+		toUpdateBrowser.setUsername(browser.getUsername());
+		toUpdateBrowser.setPassword(browser.getPassword());
+		toUpdateBrowser.setOwner(browser.getOwner());
+		toUpdateBrowser.setModifiedDate(new Date());
+		return repository.save(toUpdateBrowser);
 	}
 }
