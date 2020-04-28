@@ -41,4 +41,8 @@ public class BrowserService {
 		toUpdateBrowser.setModifiedDate(new Date());
 		return repository.save(toUpdateBrowser);
 	}
+
+	public void delete(String id) {
+		repository.deleteById(id);
+	}
 }
