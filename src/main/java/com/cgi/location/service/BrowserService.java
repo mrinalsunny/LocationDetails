@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.cgi.location.model.Browser;
@@ -15,8 +14,6 @@ public class BrowserService {
 
 	@Autowired
 	BrowserRepository repository;
-	@Autowired
-	MongoTemplate mongoTemplate;
 
 	public List<Browser> findAll() {
 		return repository.findAll();
@@ -34,6 +31,7 @@ public class BrowserService {
 	public Browser update(String id, Browser browser) {
 		Browser toUpdateBrowser = repository.findById(id).get();
 		System.out.println(toUpdateBrowser);
+		toUpdateBrowser.setApp(browser.getApp());
 		toUpdateBrowser.setHost(browser.getHost());
 		toUpdateBrowser.setUsername(browser.getUsername());
 		toUpdateBrowser.setPassword(browser.getPassword());

@@ -29,8 +29,8 @@ public class LocationsApplication implements CommandLineRunner {
 		repository.deleteAll();
 
 		// save a couple of browsers
-		repository.save(new Browser("158.234.207.101", "tomcat8", "banana12", "mrinal",new Date()));
-		repository.save(new Browser("158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
+		repository.save(new Browser("DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date()));
+		repository.save(new Browser("PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
 
 		// fetch all browsers
 		System.out.println();

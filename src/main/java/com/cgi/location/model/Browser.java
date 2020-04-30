@@ -11,6 +11,7 @@ public class Browser {
 	@Id
 	private String id;
 
+	private String app;
 	private String host;
 	private String username;
 	private String password;
@@ -20,7 +21,8 @@ public class Browser {
 	public Browser() {
 	}
 
-	public Browser(String host, String username, String password, String owner, Date modifiedDate) {
+	public Browser(String app, String host, String username, String password, String owner, Date modifiedDate) {
+		this.app = app;
 		this.host = host;
 		this.username = username;
 		this.password = password;
@@ -32,8 +34,12 @@ public class Browser {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
 	}
 
 	public String getHost() {
@@ -78,8 +84,8 @@ public class Browser {
 
 	@Override
 	public String toString() {
-		return "Browser [id=" + id + ", host=" + host + ", username=" + username + ", password=" + password + ", owner="
-				+ owner + ", modifiedDate=" + modifiedDate + "]";
+		return "Browser [id=" + id + ", app=" + app + ", host=" + host + ", username=" + username + ", password="
+				+ password + ", owner=" + owner + ", modifiedDate=" + modifiedDate + "]";
 	}
 
 }
