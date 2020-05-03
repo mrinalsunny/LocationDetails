@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.cgi.location.model.Browser;
+import com.cgi.location.model.User;
 import com.cgi.location.repo.BrowserRepository;
+import com.cgi.location.repo.UserRepository;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -17,7 +19,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class LocationsApplication implements CommandLineRunner {
 
 	@Autowired
-	BrowserRepository repository;
+	BrowserRepository browserRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LocationsApplication.class, args);
@@ -26,19 +31,26 @@ public class LocationsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		repository.deleteAll();
+		browserRepository.deleteAll();
+		userRepository.deleteAll();
 
 		// save a couple of browsers
-		repository.save(new Browser("DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date()));
-		repository.save(new Browser("PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
+		browserRepository.save(new Browser("DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date()));
+		browserRepository.save(new Browser("PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
 
+		String[] sq= {"what is your pet name?"};
+		String[] sa= {"sandy"};
+
+		//save a user
+		userRepository.save(new User("Mrinal","Guchait","mrinal.guchait","mrinal.guchait@gmail.com","banana12",sq,sa));
+		
 		// fetch all browsers
 		System.out.println();
 		System.out.println("Customers found with findAll() by lambda:");
-		repository.findAll().forEach(System.out::println);
+		browserRepository.findAll().forEach(System.out::println);
 		System.out.println("Customers found with findAll():");
 		System.out.println("-------------------------------");
-		for (Browser browser : repository.findAll()) {
+		for (Browser browser : browserRepository.findAll()) {
 			System.out.println(browser);
 		}
 		System.out.println();
@@ -47,11 +59,11 @@ public class LocationsApplication implements CommandLineRunner {
 
 		System.out.println("Customer found with findByOwner('mrinal'):");
 		System.out.println("--------------------------------");
-		System.out.println(repository.findByOwner("mrinal"));
+		System.out.println(browserRepository.findByOwner("mrinal"));
 
 		System.out.println("Customers found with findByUsername('tomcat8'):");
 		System.out.println("--------------------------------");
-		for (Browser browser : repository.findByUsername("tomcat8")) {
+		for (Browser browser : browserRepository.findByUsername("tomcat8")) {
 			System.out.println(browser);
 		}
 
