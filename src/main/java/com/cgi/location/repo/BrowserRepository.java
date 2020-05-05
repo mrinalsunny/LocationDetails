@@ -8,7 +8,6 @@ import com.cgi.location.model.Browser;
 
 public interface BrowserRepository extends MongoRepository<Browser, String> {
 
-
 	public List<Browser> findByOwner(String owner);
 
 	public List<Browser> findByUsername(String username);

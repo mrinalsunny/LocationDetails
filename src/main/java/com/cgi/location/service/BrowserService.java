@@ -13,23 +13,24 @@ import com.cgi.location.repo.BrowserRepository;
 public class BrowserService {
 
 	@Autowired
-	BrowserRepository browserRepository;
+	BrowserRepository repository;
 
 	public List<Browser> findAll() {
-		return browserRepository.findAll();
+		return repository.findAll();
 	}
 
 	public Browser findById(String id) {
-		return browserRepository.findById(id).get();
+		return repository.findById(id).get();
 	}
 
 	public Browser save(Browser browser) {
+		browser.setCreateDate(new Date());
 		browser.setModifiedDate(new Date());
-		return browserRepository.save(browser);
+		return repository.save(browser);
 	}
 
 	public Browser update(String id, Browser browser) {
-		Browser toUpdateBrowser = browserRepository.findById(id).get();
+		Browser toUpdateBrowser = repository.findById(id).get();
 		System.out.println(toUpdateBrowser);
 		toUpdateBrowser.setApp(browser.getApp());
 		toUpdateBrowser.setHost(browser.getHost());
@@ -37,10 +38,10 @@ public class BrowserService {
 		toUpdateBrowser.setPassword(browser.getPassword());
 		toUpdateBrowser.setOwner(browser.getOwner());
 		toUpdateBrowser.setModifiedDate(new Date());
-		return browserRepository.save(toUpdateBrowser);
+		return repository.save(toUpdateBrowser);
 	}
 
 	public void delete(String id) {
-		browserRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 }

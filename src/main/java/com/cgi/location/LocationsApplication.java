@@ -1,6 +1,8 @@
 package com.cgi.location;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,8 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.cgi.location.model.Browser;
+import com.cgi.location.model.Controller;
 import com.cgi.location.model.User;
 import com.cgi.location.repo.BrowserRepository;
+import com.cgi.location.repo.ControllerRepository;
 import com.cgi.location.repo.UserRepository;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -20,7 +24,8 @@ public class LocationsApplication implements CommandLineRunner {
 
 	@Autowired
 	BrowserRepository browserRepository;
-	
+	@Autowired
+	ControllerRepository controllerRepository;
 	@Autowired
 	UserRepository userRepository;
 
@@ -32,17 +37,19 @@ public class LocationsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		browserRepository.deleteAll();
+		controllerRepository.deleteAll();
 		userRepository.deleteAll();
 
-		// save a couple of browsers
-		browserRepository.save(new Browser("DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date()));
-		browserRepository.save(new Browser("PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date()));
-
-		String[] sq= {"what is your pet name?"};
-		String[] sa= {"sandy"};
+		// save a browsers
+		browserRepository.save(new Browser(null,"DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date(),new Date()));
+		// save a controller
+		controllerRepository.save(new Controller(null,"PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date(),new Date()));
+		
+		Map<String,String> qa = new HashMap<>();
+		qa.put("what is your pet name?","sandy");
 
 		//save a user
-		userRepository.save(new User("Mrinal","Guchait","mrinal.guchait","mrinal.guchait@gmail.com","banana12",sq,sa));
+		userRepository.save(new User(null,"Mrinal","Guchait","mrinal.guchait","mrinal.guchait@gmail.com","banana12",qa,new Date(),new Date()));
 		
 		// fetch all browsers
 		System.out.println();

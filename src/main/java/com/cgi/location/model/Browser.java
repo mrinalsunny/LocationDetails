@@ -5,6 +5,17 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Document(collection = "Browser")
 public class Browser {
 
@@ -16,76 +27,7 @@ public class Browser {
 	private String username;
 	private String password;
 	private String owner;
+	private Date createDate;
 	private Date modifiedDate;
-
-	public Browser() {
-	}
-
-	public Browser(String app, String host, String username, String password, String owner, Date modifiedDate) {
-		this.app = app;
-		this.host = host;
-		this.username = username;
-		this.password = password;
-		this.owner = owner;
-		this.modifiedDate = modifiedDate;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getApp() {
-		return app;
-	}
-
-	public void setApp(String app) {
-		this.app = app;
-	}
-
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getOwner() {
-		return owner;
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Browser [id=" + id + ", app=" + app + ", host=" + host + ", username=" + username + ", password="
-				+ password + ", owner=" + owner + ", modifiedDate=" + modifiedDate + "]";
-	}
 
 }

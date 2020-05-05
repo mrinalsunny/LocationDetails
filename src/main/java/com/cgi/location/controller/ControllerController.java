@@ -12,38 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgi.location.model.Browser;
-import com.cgi.location.service.BrowserService;
+import com.cgi.location.model.Controller;
+import com.cgi.location.service.ControllerService;
 
 @RestController
-@RequestMapping("/api/v1/browser")
-public class BrowserController {
+@RequestMapping("/api/v1/controller")
+public class ControllerController {
 
 	@Autowired
-	BrowserService browserService;
+	ControllerService controllerService;
 
 	@GetMapping("/get/all")
-	public List<Browser> getAll() {
-		return browserService.findAll();
+	public List<Controller> getAll() {
+		return controllerService.findAll();
 	}
 
 	@GetMapping("/get/{id}")
-	public Browser getById(@PathVariable("id") String id) {
-		return browserService.findById(id);
+	public Controller getById(@PathVariable("id") String id) {
+		return controllerService.findById(id);
 	}
 
 	@PostMapping("/add")
-	public Browser save(@RequestBody Browser browser) {
-		return browserService.save(browser);
+	public Controller save(@RequestBody Controller controller) {
+		return controllerService.save(controller);
 	}
 
 	@PutMapping("update/{id}")
-	public Browser update(@PathVariable("id") String id, @RequestBody Browser browser) {
-		return browserService.update(id, browser);
+	public Controller update(@PathVariable("id") String id, @RequestBody Controller controller) {
+		return controllerService.update(id, controller);
 	}
 
 	@DeleteMapping("delete/{id}")
-	public void delete(@PathVariable("id") String id) {
-		browserService.delete(id);
+	public void deleteBrowser(@PathVariable("id") String id) {
+		controllerService.delete(id);
 	}
 }

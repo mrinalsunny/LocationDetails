@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.cgi.location.model.Browser;
+import com.cgi.location.model.Controller;
 
-public interface ControllerRepository extends MongoRepository<Browser, String> {
+public interface ControllerRepository extends MongoRepository<Controller, String> {
 
+	public List<Controller> findByOwner(String owner);
 
-	public List<Browser> findByOwner(String owner);
-
-	public List<Browser> findByUsername(String username);
+	public List<Controller> findByUsername(String username);
 
 }

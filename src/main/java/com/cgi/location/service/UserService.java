@@ -34,8 +34,7 @@ public class UserService {
 		toUpdateUser.setLastName(user.getLastName());
 		toUpdateUser.setUsername(user.getUsername());
 		toUpdateUser.setPassword(user.getPassword());
-		toUpdateUser.setSecurityQuestions(user.getSecurityQuestions());
-		toUpdateUser.setSecurityAnswers(user.getSecurityAnswers());
+		toUpdateUser.setSecurityQA(user.getSecurityQA());
 		toUpdateUser.setModifiedDate(new Date());
 		return userRepository.save(toUpdateUser);
 	}
