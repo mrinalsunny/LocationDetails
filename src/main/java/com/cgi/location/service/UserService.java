@@ -11,7 +11,7 @@ import com.cgi.location.repo.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	UserRepository userRepository;
 
@@ -21,6 +21,9 @@ public class UserService {
 
 	public User finById(String id) {
 		return userRepository.findById(id).get();
+	}
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 	public User addUser(User user) {
@@ -36,12 +39,14 @@ public class UserService {
 		toUpdateUser.setPassword(user.getPassword());
 		toUpdateUser.setSecurityQA(user.getSecurityQA());
 		toUpdateUser.setModifiedDate(new Date());
+		toUpdateUser.setStatus(user.getStatus());
+		toUpdateUser.setRole(user.getRole());
+		
 		return userRepository.save(toUpdateUser);
 	}
 
 	public void deleteUser(String id) {
 		userRepository.deleteById(id);
 	}
-	
 
 }

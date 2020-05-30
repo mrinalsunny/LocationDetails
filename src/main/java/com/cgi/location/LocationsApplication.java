@@ -41,7 +41,8 @@ public class LocationsApplication implements CommandLineRunner {
 		userRepository.deleteAll();
 
 		// save a browsers
-		browserRepository.save(new Browser(null,"DB847-sanity","158.234.207.101", "tomcat8", "banana12", "mrinal",new Date(),new Date()));
+		browserRepository.save(new Browser(null,"DB847-sanity","158.234.207.101", "tomcat8", "banana12", "admin",new Date(),new Date()));
+		browserRepository.save(new Browser(null,"DB847-847","158.234.207.102", "tomcat8", "banana12", "mrinal",new Date(),new Date()));
 		// save a controller
 		controllerRepository.save(new Controller(null,"PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date(),new Date()));
 		
@@ -49,7 +50,8 @@ public class LocationsApplication implements CommandLineRunner {
 		qa.put("what is your pet name?","sandy");
 
 		//save a user
-		userRepository.save(new User(null,"Mrinal","Guchait","mrinal.guchait","mrinal.guchait@gmail.com","banana12",qa,new Date(),new Date()));
+		userRepository.save(new User(null,"Mrinal","Guchait","admin","mrinal.guchait@gmail.com","$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m",qa,new Date(),new Date(),"enable","ADMIN"));
+		userRepository.save(new User(null,"Mrinal","Guchait","mrinal","mrinal.guchait@gmail.com","$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m",qa,new Date(),new Date(),"enable","ADMIN"));
 		
 		// fetch all browsers
 		System.out.println();

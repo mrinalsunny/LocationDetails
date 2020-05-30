@@ -32,5 +32,7 @@ public class User {
 	private Map<String,String> securityQA;
 	private Date createdDate;
 	private Date modifiedDate;
+	private String status;
+	private String role;
 
 }
