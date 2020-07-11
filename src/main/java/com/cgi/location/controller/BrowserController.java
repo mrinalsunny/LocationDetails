@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.cgi.location.model.Browser;
 import com.cgi.location.service.BrowserService;
@@ -21,9 +22,13 @@ public class BrowserController {
 
 	@Autowired
 	BrowserService browserService;
+	
+	@Autowired
+	RestTemplate resttemplate;
 
 	@GetMapping("/get/all")
 	public List<Browser> getAll() {
+//		resttemplate.getForObject("http://localhost:8080/kafka/publish/get", Browser.class);
 		return browserService.findAll();
 	}
 

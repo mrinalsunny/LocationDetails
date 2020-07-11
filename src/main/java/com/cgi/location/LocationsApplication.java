@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import com.cgi.location.model.Browser;
 import com.cgi.location.model.Controller;
@@ -33,6 +35,11 @@ public class LocationsApplication implements CommandLineRunner {
 		SpringApplication.run(LocationsApplication.class, args);
 	}
 
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
+
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -41,18 +48,25 @@ public class LocationsApplication implements CommandLineRunner {
 		userRepository.deleteAll();
 
 		// save a browsers
-		browserRepository.save(new Browser(null,"DB847-sanity","158.234.207.101", "tomcat8", "banana12", "admin",new Date(),new Date()));
-		browserRepository.save(new Browser(null,"DB847-847","158.234.207.102", "tomcat8", "banana12", "mrinal",new Date(),new Date()));
+		browserRepository.save(new Browser(null, "DB847-sanity", "158.234.207.101", "tomcat8", "banana12", "admin",
+				new Date(), new Date()));
+		browserRepository.save(new Browser(null, "DB847-847", "158.234.207.102", "tomcat8", "banana12", "mrinal",
+				new Date(), new Date()));
 		// save a controller
-		controllerRepository.save(new Controller(null,"PB848","158.234.207.102", "tomcat8", "banana12", "sunny",new Date(),new Date()));
-		
-		Map<String,String> qa = new HashMap<>();
-		qa.put("what is your pet name?","sandy");
+		controllerRepository.save(new Controller(null, "PB848", "158.234.207.102", "tomcat8", "banana12", "sunny",
+				new Date(), new Date()));
 
-		//save a user
-		userRepository.save(new User(null,"Mrinal","Guchait","admin","mrinal.guchait@gmail.com","$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m",qa,new Date(),new Date(),"enable","ADMIN"));
-		userRepository.save(new User(null,"Mrinal","Guchait","mrinal","mrinal.guchait@gmail.com","$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m",qa,new Date(),new Date(),"enable","ADMIN"));
-		
+		Map<String, String> qa = new HashMap<>();
+		qa.put("what is your pet name?", "sandy");
+
+		// save a user
+		userRepository.save(new User(null, "Mrinal", "Guchait", "admin", "mrinal.guchait@gmail.com",
+				"$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m", qa, new Date(), new Date(), "enable",
+				"ADMIN"));
+		userRepository.save(new User(null, "Mrinal", "Guchait", "mrinal", "mrinal.guchait@gmail.com",
+				"$2a$10$LZdOFTVdeND6HsIA.g35hu3iKoXLXaur1d0V2cIDW8nW77FNTpw2m", qa, new Date(), new Date(), "enable",
+				"ADMIN"));
+
 		// fetch all browsers
 		System.out.println();
 		System.out.println("Customers found with findAll() by lambda:");
