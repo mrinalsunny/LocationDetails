@@ -3,6 +3,8 @@ package com.cgi.location.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
 import com.cgi.location.model.Browser;
 import com.cgi.location.service.BrowserService;
 
@@ -24,12 +24,14 @@ public class BrowserController {
 	BrowserService browserService;
 	
 	@Autowired
-	RestTemplate resttemplate;
+	private KafkaTemplate<String, String> kafkaTemplate;
+
+	private static final String TOPIC = "hsbro";
 
 	@GetMapping("/get/all")
 	public List<Browser> getAll() {
-//		resttemplate.getForObject("http://localhost:8080/kafka/publish/get", Browser.class);
-		return browserService.findAll();
+		List<Browser> browsers = browserService.findAll();
+		return browsers;
 	}
 
 	@GetMapping("/get/{id}")
@@ -38,17 +40,25 @@ public class BrowserController {
 	}
 
 	@PostMapping("/add")
+	@Transactional
 	public Browser save(@RequestBody Browser browser) {
-		return browserService.save(browser);
+		Browser addedBrowser = browserService.save(browser);
+		kafkaTemplate.send(TOPIC, addedBrowser.toString());
+		return addedBrowser;
 	}
 
 	@PutMapping("update/{id}")
+	@Transactional
 	public Browser update(@PathVariable("id") String id, @RequestBody Browser browser) {
-		return browserService.update(id, browser);
+		Browser updatedBrowser = browserService.update(id, browser);
+		kafkaTemplate.send(TOPIC, updatedBrowser.toString());
+		return updatedBrowser;
 	}
 
 	@DeleteMapping("delete/{id}")
+	@Transactional
 	public void delete(@PathVariable("id") String id) {
 		browserService.delete(id);
+		kafkaTemplate.send(TOPIC, id);
 	}
 }
